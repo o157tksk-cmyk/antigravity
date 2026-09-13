@@ -1,0 +1,59 @@
+---
+# ==============================================================================
+# Ansible Role: linux_web (Rocky Linux 10 Apache Web Server)
+# ==============================================================================
+
+- name: Install Apache HTTP Server (httpd)
+  ansible.builtin.dnf:
+    name:
+      - httpd
+      - httpd-tools
+      - firewalld
+    state: present
+
+- name: Enable and Start httpd Service
+  ansible.builtin.systemd:
+    name: httpd
+    enabled: true
+    state: started
+
+- name: Enable and Start firewalld Service
+  ansible.builtin.systemd:
+    name: firewalld
+    enabled: true
+    state: started
+
+- name: Permit HTTP and HTTPS services in firewalld
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+    immediate: true
+  loop:
+    - http
+    - https
+
+- name: Deploy Test Index HTML Page
+  ansible.builtin.copy:
+    dest: /var/www/html/index.html
+    mode: '0644'
+    content: |
+      <!DOCTYPE html>
+      <html lang="ja">
+      <head>
+          <meta charset="UTF-8">
+          <title>Rocky Linux 10 Apache Web Server</title>
+          <style>
+              body { font-family: sans-serif; background: #0f172a; color: #f8fafc; padding: 40px; text-align: center; }
+              .card { background: #1e293b; display: inline-block; padding: 32px; border-radius: 12px; border: 1px solid #334155; }
+              h1 { color: #38bdf8; }
+          </style>
+      </head>
+      <body>
+          <div class="card">
+              <h1>🚀 Rocky Linux 10 Web Server (Ansible Provisioned)</h1>
+              <p>Active Directory: <strong>hogehoge.local</strong> (192.168.10.10)</p>
+              <p>Web Server IP: <strong>192.168.10.20</strong></p>
+          </div>
+      </body>
+      </html>

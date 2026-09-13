@@ -1,0 +1,17 @@
+---
+# ==============================================================================
+# Ansible Main Playbook (playbook.yml)
+# Windows AD (hogehoge.local) 構築 & Rocky Linux 10 Apache Web サーバー構築
+# ==============================================================================
+
+- name: Provision Active Directory Domain Controller (hogehoge.local)
+  hosts: windows_ad
+  gather_facts: false
+  roles:
+    - windows_ad
+
+- name: Provision Apache HTTP Web Server on Rocky Linux 10
+  hosts: linux_web
+  gather_facts: true
+  roles:
+    - linux_web

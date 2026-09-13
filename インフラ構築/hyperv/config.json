@@ -1,0 +1,58 @@
+{
+  "domain": {
+    "name": "hogehoge.local",
+    "netbios": "HOGEHOGE"
+  },
+  "admin": {
+    "username": "Administrator",
+    "password": "P@ssw0rd2022!"
+  },
+  "network": {
+    "switchName": "LabInternalSwitch",
+    "gateway": "192.168.10.1",
+    "prefixLength": 24,
+    "subnet": "192.168.10.0/24"
+  },
+  "dc01": {
+    "vmName": "Win2022-DC01",
+    "ipAddress": "192.168.10.10"
+  },
+  "dc02": {
+    "vmName": "Win2022-DC02",
+    "ipAddress": "192.168.10.11"
+  },
+  "rockyTemplate": {
+    "vmName": "Rocky9-Template",
+    "ramMB": 2048,
+    "cpuCount": 2,
+    "diskSizeGB": 30
+  },
+  "servicesVm": {
+    "vmName": "Rocky9-AppSrv",
+    "hostname": "srv01",
+    "ipAddress": "192.168.10.20",
+    "ramMB": 4096,
+    "cpuCount": 2,
+    "diskSizeGB": 40,
+    "dnsRecords": {
+      "web": "web",
+      "dns": "ns",
+      "mail": "mail"
+    },
+    "externalDnsForwarders": [
+      "8.8.8.8",
+      "1.1.1.1"
+    ],
+    "ldapServiceUser": {
+      "username": "svc_ldap",
+      "password": "P@ssw0rd2022!"
+    }
+  },
+  "paths": {
+    "winIsoPath": "C:\\HyperV\\ISO\\WindowsServer2022.iso",
+    "rockyIsoPath": "C:\\HyperV\\ISO\\RockyLinux9.iso",
+    "masterDir": "C:\\HyperV\\Master",
+    "vmDir": "C:\\HyperV\\VMs",
+    "isoDir": "C:\\HyperV\\ISO"
+  }
+}
